@@ -46,6 +46,8 @@ public class gameManager : MonoBehaviour
 
     public void ubicaObjetosUI()
     {
+
+        //los eliminamos
         for (int i = 0; i < elementosUIEnPantalla.Length; i++)
         {
             Destroy(elementosUIEnPantalla[i]);
@@ -56,25 +58,39 @@ public class gameManager : MonoBehaviour
 
         punteroItems.position = posicionInicialPuntero;
 
-
+        //se ubican de nuevo
             for (int i = 0; i < cantidadObjetosConseguidos.Length; i++)
         {
 
+            if (cantidadObjetosConseguidos[i]>0)
+            {
+
+
+            
+
             System.Array.Resize(ref elementosUIEnPantalla, elementosUIEnPantalla.Length + 1);
 
+            //aquí se instancia un icono en el canvas
             GameObject prefab = Instantiate(itemUIPrefab, punteroItems.position, punteroItems.rotation);
+
+            //lo pone bien "fromateado"
             prefab.transform.parent = punteroItems.parent;
             prefab.GetComponent<RectTransform>().sizeDelta = new Vector2(punteroItems.GetComponent<RectTransform>().sizeDelta.x, punteroItems.GetComponent<RectTransform>().sizeDelta.y);
             prefab.transform.localScale = Vector3.one;
+
+
+            //se almacenan agrupados por tipo aqui
             elementosUIEnPantalla[elementosUIEnPantalla.Length - 1] = prefab;
 
+            prefab.GetComponent<elementoUIitem>().activaItem(i, cantidadObjetosConseguidos[i]);
 
 
             float deltaY = punteroItems.GetComponent<RectTransform>().sizeDelta.y/2;
             punteroItems.transform.position = new Vector3(punteroItems.transform.position.x, punteroItems.transform.position.y - deltaY, punteroItems.transform.position.z);
-
+            }
         }
 
+        
     }
 
 
@@ -104,9 +120,6 @@ public class gameManager : MonoBehaviour
         objetosConseguidos[objetosConseguidos.Length-1] = objeto;
 
         int valor = objeto.GetComponent<Item>().numeroItem;
-
-
-
 
 
         cantidadObjetosConseguidos[valor] += 1;

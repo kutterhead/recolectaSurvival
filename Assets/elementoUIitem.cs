@@ -24,22 +24,23 @@ public class elementoUIitem : MonoBehaviour
 
     void Start()
     {
-        activaItem(2,13);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 
+    // Update is called once per frame
+    
+
+
+    //índice de imagen y número de elementos
     public void activaItem(int index, int numElementos)
     {
         imagenActual.sprite = imagenesIconos[index];
         tipoItem = index;
+
+
         textoNombre.text = nombresItems[index];
         textoCantidad.text = numElementos.ToString();
-
+        print("elemento UIitem activado, indice: " + index + " elementos: " + numElementos);
     }
 
 

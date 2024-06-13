@@ -21,6 +21,8 @@ public class detectorColission : MonoBehaviour
         {
 
             print("Colisión con Item");
+
+
             manager.GetComponent<gameManager>().incorporaObjeto(other.gameObject);
             
             

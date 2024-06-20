@@ -7,6 +7,20 @@ public class elementoTienda : MonoBehaviour
 {
     public gameManager manager;
     public int indiceTipoObjeto;//describe el tipo de objeto
+    
+
+
+    public byte materiaIndex0;
+    public byte materiaIndex1;
+    public byte materiaIndex2;
+
+
+    public Image imagenElemento;
+    //imágenes locales de los recursos que cuesta el elemento
+    public Image imagenMateria0;
+    public Image imagenMateria1;
+    public Image imagenMateria2;
+
 
 
     //es el coste de este artículo
@@ -20,17 +34,42 @@ public class elementoTienda : MonoBehaviour
     public Text ironText;
     public Text woodText;
 
+    private void Awake()
+    {
+        manager = GameObject.FindGameObjectWithTag("gameManager").GetComponent<gameManager>();
+    }
     void Start()
     {
         //por si acaso
-        manager = GameObject.FindGameObjectWithTag("gameManager").GetComponent<gameManager>();
+        
 
         goldText.text = GoldValue.ToString();
         ironText.text = IronValue.ToString();
         woodText.text = WoodValue.ToString();
+
+        iniciaImagenes();
     }
 
+    public void iniciaImagenes()
+    {
+        print("Indice. " + indiceTipoObjeto);
+        imagenElemento.sprite = manager.imagenesIconos[indiceTipoObjeto];
 
+        imagenMateria0.sprite = manager.imagenesIconos[materiaIndex0];
+        imagenMateria1.sprite = manager.imagenesIconos[materiaIndex1];
+        imagenMateria2.sprite = manager.imagenesIconos[materiaIndex2];
+
+        //if (manager.imagenesIconos[indiceTipoObjeto]==null)
+        //{
+
+        //    print("Objeto vacío");
+        //}
+        //else
+        //{
+        //    print("Objeto No vacío: " + manager.imagenesIconos[indiceTipoObjeto].name);
+        //}
+
+    }
 
     public void compraObjeto()
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class gameManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    public string[] nombresItems;
     public Sprite[] imagenesIconos;//ejemplos de iconos
     public bool mostrarCeros;//variable usada para mostrar los iconos que estén a cero o no
 

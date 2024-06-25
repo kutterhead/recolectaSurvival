@@ -41,14 +41,14 @@ public class elementoUIitem : MonoBehaviour
     {
         print("Indice: " + index);
         imagenActual.sprite = manager.imagenesIconos[index];
-        
-        
-        
-        //tipoItem = index;
 
 
-        //textoNombre.text = manager.nombresItems[index];
-        //textoCantidad.text = numElementos.ToString();
+
+        tipoItem = index;
+
+
+        textoNombre.text = manager.nombresItems[index];
+        textoCantidad.text = numElementos.ToString();
         print("elemento UIitem activado, indice: " + index + " elementos: " + numElementos);
     }
 

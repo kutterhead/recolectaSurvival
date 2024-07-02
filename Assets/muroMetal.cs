@@ -20,7 +20,7 @@ public class muroMetal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         bool hasKnife = player.GetComponent<Animator>().GetBool("HoldKnife");
-        if (other.gameObject.CompareTag("Cuchillo") && hasKnife) ;
+        if (other.gameObject.CompareTag("Cuchillo") && hasKnife) 
         {
             print("Colision detectada con cuchillo, debe ser eliminado");
             //se desactiva cuando el cuchillo se pierde
@@ -33,6 +33,18 @@ public class muroMetal : MonoBehaviour
             //Destroy(other.gameObject);
 
             manager.GetComponent<gameManager>().pierdeCuchillo();
+
+
+        }
+
+        if (other.gameObject.CompareTag("Linterna")) 
+        {
+            print("Colision detectada con linterna, debe ser eliminada");
+            //se desactiva cuando el cuchillo se pierde
+
+
+            manager.GetComponent<gameManager>().linternaEnMano.SetActive(false);
+            manager.GetComponent<gameManager>().pierdeLinterna();
 
 
         }

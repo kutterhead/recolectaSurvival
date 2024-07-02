@@ -5,8 +5,9 @@ using UnityEngine;
 public class gameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public string[] nombresItems;
     public Sprite[] imagenesIconos;//ejemplos de iconos
+    public string[] nombresItems;
+    
     public bool mostrarCeros;//variable usada para mostrar los iconos que estén a cero o no
 
     public Transform punteroItems;
@@ -16,10 +17,12 @@ public class gameManager : MonoBehaviour
     public GameObject itemUIPrefab;
 
 
-
+    //no hace falta está de depuración
     public GameObject[] objetosConseguidos;
 
     public GameObject cuchilloPerdidoPrefab;
+    public GameObject linternaPerdidaPrefab;
+
 
 
     public GameObject player;
@@ -31,6 +34,8 @@ public class gameManager : MonoBehaviour
 
     //objeto que transporta en la mano y es oculto cuando no usa cuchillo
     public GameObject cuchilloEnMano;
+    public GameObject linternaEnMano;
+
 
 
 
@@ -38,8 +43,24 @@ public class gameManager : MonoBehaviour
 
     void Start()
     {
+
+        //inicializamos los arrays para que dependan sólo de uno, el de iconos.
+        System.Array.Resize(ref nombresItems, imagenesIconos.Length);
+        System.Array.Resize(ref cantidadObjetosConseguidos, imagenesIconos.Length);
+
+        for(int i=0; i< imagenesIconos.Length; i++)
+        {
+            nombresItems[i] = imagenesIconos[i].name;
+        }
+
+
+
+
         posicionInicialPuntero = punteroItems.position;
         ubicaObjetosUI();
+
+
+
     }
 
     // Update is called once per frame
@@ -121,16 +142,17 @@ public class gameManager : MonoBehaviour
         cantidadObjetosConseguidos[0]--;
 
 
-        instanciaCuchilloPerdido();
+        Instantiate(cuchilloPerdidoPrefab, cuchilloEnMano.transform.position, cuchilloEnMano.transform.rotation);
         UnHoldKnife();
     }
-
-    private void instanciaCuchilloPerdido()
+    public void pierdeLinterna()
     {
+        Instantiate(linternaPerdidaPrefab, linternaEnMano.transform.position, linternaEnMano.transform.rotation);
+        cantidadObjetosConseguidos[6]--;
 
-        Instantiate(cuchilloPerdidoPrefab, cuchilloEnMano.transform.position, cuchilloEnMano.transform.rotation);
 
     }
+    
     public void incorporaObjetoEnIndice(int indice)
     {
         if (indice> cantidadObjetosConseguidos.Length-1 && indice <0)
@@ -158,34 +180,7 @@ public class gameManager : MonoBehaviour
 
 
 
-        switch (valor)
-        {
-            case 0://es el cuchillo
-                {
-
-                    //esta función pone en idle con arma y muestra el cuchillo
-                   
-                    //HoldKnife();
-                    break;
-
-                }
-            case 1:
-                {
-                    break;
-                }
-
-            case 2:
-                {
-                    break;
-                }
-
-            default:
-                {
-                    print("No se ha encontrado valor");
-                    break;
-                }
-
-        }
+        
 
 
 
@@ -193,6 +188,81 @@ public class gameManager : MonoBehaviour
         ubicaObjetosUI();
 
     }
+
+    public void seleccionObjetoConseguido(int indice)
+    {
+        
+
+        if (!(cantidadObjetosConseguidos[indice] > 0))
+        {
+
+            print("No hay elementos de tipo: " + nombresItems[indice]);
+            return;
+        }
+
+
+        print("Objeto conseguido pulsado de tipo: " + indice);
+
+
+        switch (indice)
+        {
+            case 0://es el cuchillo
+                {
+                    cuchilloEnMano.SetActive(!cuchilloEnMano.activeSelf);
+
+                    linternaEnMano.SetActive(false);
+                    print("Elemento " + nombresItems[6] + " activado");
+
+                    //esta función pone en idle con arma y muestra el cuchillo
+
+                    //HoldKnife();
+                    break;
+
+                }
+            case 1://manzana
+                {
+                    break;
+                }
+
+            case 2://oro
+                {
+                    break;
+                }
+            case 3://madera
+                {
+                    break;
+                }
+            case 4://hierro
+                {
+                    break;
+                }
+            case 5://battería
+                {
+                    break;
+                }
+            case 6://hierro
+                {
+
+                    linternaEnMano.SetActive(!linternaEnMano.activeSelf);
+                    cuchilloEnMano.SetActive(false);
+                    print("Elemento "+  nombresItems[6] + " activado");
+                   
+                    
+                    break;
+                }
+            case 7://hierro
+                {
+                    break;
+                }
+            default:
+                {
+                    print("No se ha encontrado valor");
+                    break;
+                }
+
+        }
+    }
+
 
     public void HoldKnife(){
 

@@ -14,26 +14,30 @@ public class elementoTienda : MonoBehaviour
     public byte materiaIndex1;
     public byte materiaIndex2;
 
+    //es el coste de este artículo
+
+
+    public int costoMateria0;
+    public int costoMateria1;
+    public int costoMateria2;
+
 
     public Image imagenElemento;
-    //imágenes locales de los recursos que cuesta el elemento
+    //imágenes locales de los recursos que cuesta el elemento, son la referencia par acopiar los sprites en ellas
     public Image imagenMateria0;
     public Image imagenMateria1;
     public Image imagenMateria2;
 
 
 
-    //es el coste de este artículo
 
-    public string nombre;
-    public int GoldValue;
-    public int IronValue;
-    public int WoodValue;
 
     public Text goldText;
     public Text ironText;
     public Text woodText;
+    public Text nameText;
 
+    string nombre;
     private void Awake()
     {
         manager = GameObject.FindGameObjectWithTag("gameManager").GetComponent<gameManager>();
@@ -43,9 +47,11 @@ public class elementoTienda : MonoBehaviour
         //por si acaso
         
 
-        goldText.text = GoldValue.ToString();
-        ironText.text = IronValue.ToString();
-        woodText.text = WoodValue.ToString();
+        goldText.text = costoMateria0.ToString();
+        ironText.text = costoMateria1.ToString();
+        woodText.text = costoMateria2.ToString();
+        nameText.text = manager.nombresItems[indiceTipoObjeto];
+
 
         iniciaImagenes();
     }
@@ -81,7 +87,7 @@ public class elementoTienda : MonoBehaviour
         //print(TotalGold + " " + TotalWood + " " + TotalIron);
 
 
-        //if (TotalGold >= GoldValue)
+        //if (TotalGold >= costoMateria0)
         //{
         //    print("Si puedes G:");
         //}
@@ -89,7 +95,7 @@ public class elementoTienda : MonoBehaviour
         //{
         //    print("no puedes G:");
         //}
-        //if (TotalWood >= WoodValue)
+        //if (TotalWood >= costoMateria2)
         //{
         //    print("Si puedes W:");
         //}
@@ -97,28 +103,28 @@ public class elementoTienda : MonoBehaviour
         //{
         //    print("no puedes W:");
         //}
-        //if (TotalIron >= IronValue)
+        //if (TotalIron >= costoMateria1)
         //{
         //    print("Si puedes I:");
         //}
         //else
         //{
-        //    print("no puedes I:" + TotalIron + " " + IronValue);
+        //    print("no puedes I:" + TotalIron + " " + costoMateria1);
         //}
 
 
-        if ((TotalGold>= GoldValue) && (TotalWood>= WoodValue) && (TotalIron>= IronValue))
+        if ((TotalGold>= costoMateria0) && (TotalWood>= costoMateria2) && (TotalIron>= costoMateria1))
         {
-            TotalGold -= GoldValue;
-            TotalWood -= WoodValue;
-            TotalIron -= IronValue;
+            TotalGold -= costoMateria0;
+            TotalWood -= costoMateria2;
+            TotalIron -= costoMateria1;
 
             print("oro total: " + TotalGold);
             print("madera total: " + TotalWood);
             print("hierro ttal: " + TotalIron);
-            manager.cantidadObjetosConseguidos[2] -= GoldValue;//oro
-            manager.cantidadObjetosConseguidos[3] -= WoodValue;//madera
-            manager.cantidadObjetosConseguidos[4] -= IronValue;//Hierro
+            manager.cantidadObjetosConseguidos[2] -= costoMateria0;//oro
+            manager.cantidadObjetosConseguidos[3] -= costoMateria2;//madera
+            manager.cantidadObjetosConseguidos[4] -= costoMateria1;//Hierro
             manager.incorporaObjetoEnIndice(indiceTipoObjeto);
 
 

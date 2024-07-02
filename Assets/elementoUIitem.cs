@@ -52,5 +52,10 @@ public class elementoUIitem : MonoBehaviour
         print("elemento UIitem activado, indice: " + index + " elementos: " + numElementos);
     }
 
+    public void activaobjetoConseguidoEnManager()
+    {
 
+        manager.seleccionObjetoConseguido(tipoItem);
+
+    }
 }
